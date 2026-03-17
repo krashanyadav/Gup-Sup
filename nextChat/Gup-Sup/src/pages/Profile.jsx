@@ -29,7 +29,7 @@ useEffect(() => {
           setEmail(userData.email || "");
           
           if (userData.avatar) {
-            setPreview(`http://localhost:3000${userData.avatar}`);
+            setPreview(`https://backendnextchat.onrender.com${userData.avatar}`);
           }
         }
       } catch (err) {
@@ -72,7 +72,7 @@ useEffect(() => {
         <form onSubmit={handleUpdate}>
           <div className="avatar-wrapper">
             <img src={preview || "https://i.pravatar.cc/150"} className="preview-img" alt="Avatar" />
-            <label htmlFor="avatar-input" className="change-photo-btn">फ़ोटो बदलें</label>
+            <label htmlFor="avatar-input" className="change-photo-btn">change your picture</label>
             <input 
               type="file" 
               id="avatar-input" 
