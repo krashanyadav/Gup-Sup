@@ -3,7 +3,7 @@ import { getMessages, getChats } from "../services/chatService"
 import MessageInput from "./MessageInput"
 import MessageBubble from "./MessageBubble"
 import socket from "../services/socket"
-import "../styles/ChatWindow.css"
+import "../styles/chatWindow.css"
 
 function ChatWindow({ user  , onBack}) {
 
