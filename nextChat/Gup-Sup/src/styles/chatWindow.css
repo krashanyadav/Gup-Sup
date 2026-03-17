@@ -1,0 +1,234 @@
+.chat-window{
+display:flex;
+flex-direction:column;
+background:#efeae2;
+}
+
+.chat-header{
+display:flex;
+align-items:center;
+padding:3px 3px;
+background:#f0f2f5;
+border-bottom:1px solid #ddd;
+height: 60px;
+}
+
+.avatar-wrapper{
+position:relative;
+margin-right:11px;
+margin-top: 14px;
+}
+
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.status-dot{
+position:absolute;
+bottom:2px;
+right:2px;
+width:10px;
+height:10px;
+border-radius:50%;
+border:2px solid white;
+}
+
+.status-dot.online{
+background:#00c853;
+}
+
+.status-dot.offline{
+background:#bbb;
+}
+
+.header-info h3{
+margin:0;
+font-size:16px;
+color: #4a4949;
+}
+
+.status-text{
+font-size:12px;
+}
+
+.status-text.online{
+color:#00c853;
+}
+
+.status-text.offline{
+color:#888;
+}
+
+.messages{
+flex:1;
+overflow-y:auto;
+padding:15px;
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.chat-start{
+text-align:center;
+color:#777;
+margin-top:40px;
+}
+
+.empty-chat{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#f5f5f5;
+}
+
+.empty-box{
+text-align:center;
+color:#666;
+}
+
+.empty-box h2{
+margin-top:10px;
+}
+
+
+/* =============================
+Typing Indicator Container
+============================= */
+
+.typing-indicator{
+display:flex;
+align-items:center;
+gap:5px;
+margin:6px 10px;
+padding:8px 12px;
+background:#f1f1f1;
+border-radius:16px;
+width:fit-content;
+}
+
+/* =============================
+Typing Dots
+============================= */
+
+.typing-dot{
+width:6px;
+height:6px;
+background:#777;
+border-radius:50%;
+animation:typingBounce 1.4s infinite ease-in-out;
+}
+
+/* delay for each dot */
+
+.typing-dot:nth-child(1){
+animation-delay:0s;
+}
+
+.typing-dot:nth-child(2){
+animation-delay:0.2s;
+}
+
+.typing-dot:nth-child(3){
+animation-delay:0.4s;
+}
+
+
+/* =============================
+Animation
+============================= */
+
+@keyframes typingBounce{
+
+0%, 80%, 100%{
+transform:scale(0);
+opacity:0.3;
+}
+
+40%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+
+/* media Query */
+
+/* Sabhi screens ke liye basic styling */
+.container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Mobile par stack rahega */
+}
+
+/* --- Media Queries --- */
+
+/* Tablets ke liye (768px se bade screens) */
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row; /* Tablet par side-by-side ho jayega */
+    background-color: lightblue;
+  }
+  
+  .sidebar {
+    width: 30%;
+  }
+}
+
+/* Desktop ke liye (1024px se bade screens) */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+  }
+}
+
+
+
+/* Desktop par back button ki zarurat nahi hai */
+.back-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: rgb(245, 153, 176);
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .back-btn {
+    display: block; /* Sirf mobile par dikhega */
+  }
+
+  .chat-window-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200; /* Sidebar se upar */
+    background: white;
+  }
+
+  /* Agar user select nahi hai, toh chat window ko hide rakho */
+  .mobile-hide {
+    display: none;
+  }
+}
+
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #f0f2f5;
+  color: #667781;
+}

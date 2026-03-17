@@ -1,0 +1,151 @@
+/* Sidebar Container */
+.sidebar {
+  width: 350px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+/* Header & Search */
+.sidebar-header {
+  padding: 15px;
+  background-color: #f0f2f5;
+}
+
+.sidebar-header h2 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  color: #008069;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ffffff;
+  outline: none;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Contacts List */
+.contacts-list {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+/* Individual Contact Card */
+.contact-card {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  cursor: pointer;
+  border: 0.5px solid #f0eded;
+  transition: 0.2s;
+}
+
+.contact-card:hover {
+  background-color: #e5ebeb;
+}
+
+.contact-card.active {
+  background-color: #ebebeb;
+}
+
+/* Avatar & Status */
+.avatar-box {
+  position: relative;
+  margin-right: 15px;
+}
+
+.sidebar-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Text Details */
+.contact-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.contact-name {
+  font-weight: 500;
+  font-size: 16px;
+  color: #111b21;
+}
+
+
+
+.sidebar-msg {
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
+}
+
+/* --- Responsive Logic --- */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: relative; /* Mobile par pura screen cover karega */
+    z-index: 100;
+  }
+
+  /* Jab user select ho jaye, toh sidebar ko left bhej do */
+  .sidebar.mobile-hidden {
+    transform: translateX(-100%);
+    visibility: hidden;
+  }
+}
+
+
+/* remove contact */
+/* Sidebar Row setup for Name and Button */
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Remove Button Styling */
+.remove-contact-btn {
+  background: transparent;
+  border: none;
+  color: #999;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 5px;
+  opacity: 0; /* Normal state mein hidden */
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+/* Jab card par mouse jaye tab button dikhe */
+.contact-card:hover .remove-contact-btn {
+  opacity: 1;
+}
+
+.remove-contact-btn:hover {
+  color: #ff5252; /* Delete red color */
+  transform: scale(1.2);
+}
+
+/* Status dots */
+.status-indicator.offline {
+  background-color: #bbb;
+}
+
+/* Mobile hidden utility */
+@media (max-width: 768px) {
+  .sidebar.mobile-hidden {
+    display: none;
+  }
+}
