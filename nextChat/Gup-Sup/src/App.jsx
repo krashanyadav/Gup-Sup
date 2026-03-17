@@ -4,7 +4,6 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import Profile from "./pages/profile"
-import ChatPage from "./pages/ChatPage"
 
 function App(){
 
