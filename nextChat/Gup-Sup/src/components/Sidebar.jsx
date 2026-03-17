@@ -83,7 +83,7 @@ function Sidebar({ setUser, selectedUserId }) {
                     className="sidebar-avatar"
                     src={
                       user?.avatar
-                        ? `http://localhost:3000${user.avatar}`
+                        ? `http://https://backendnextchat.onrender.com${user.avatar}`
                         : `https://ui-avatars.com/api/?name=${user?.username}&background=random`
                     }
                     alt={user?.username}
