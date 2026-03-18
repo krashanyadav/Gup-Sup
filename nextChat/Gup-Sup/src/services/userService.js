@@ -2,7 +2,7 @@ import { data } from "react-router-dom";
 import API from "./axiosInstance";
 
 export const getAllUsers = (data)=>{
-  return API.get("/user" ,data);
+  return API.get("/user/" ,data);
 }
 
 export const getMyProfile = (data)=>{

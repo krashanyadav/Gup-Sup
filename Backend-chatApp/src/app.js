@@ -18,7 +18,9 @@ app.use("/uploads", express.static("uploads"));
 // app.use(cors());
 
 app.use(cors({
-  origin: true,
+  origin: process.env.NODE_ENV === "production"
+    ? "https://gup-supnextchat.onrender.com"
+    : "http://localhost:5173",
   credentials: true
 }));
 app.use(express.json());

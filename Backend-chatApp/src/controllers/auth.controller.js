@@ -118,39 +118,49 @@ async function register(req, res) {
 
 }
 //3.login
+
 async function login(req, res) {
+  try {
+    const { email, password } = req.body;
 
-  const { email, password } = req.body;
+    const user = await User.findOne({ email });
 
-  const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
 
-  if (!user) {
-    return res.status(400).json({
-      message: "Invalid email or password"
+    const isMatch = await user.comparePassword(password);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    if (!user.isVerified) {
+      return res.status(401).json({ message: "User not verified" });
+    }
+
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/"
     });
-  }
-
-  const match = await bcrypt.compare(password, user.password);
-
-  if (!match) {
-    return res.status(400).json({
-      message: "Invalid email or password"
+    // ✅ TOKEN FRONTEND KO DO
+    return res.status(200).json({
+      message: "Login successful",
+      user,
     });
+
+  } catch (error) {
+    return res.status(500).json({ message: "Server error" });
   }
-  const jwt = require("jsonwebtoken")
-  const token = jwt.sign(
-    { userId: user._id },
-    process.env.JWT_SECRET,
-    { expiresIn: "7d" }
-  );
-  res.cookie("token" , token);
-
-  res.json({
-    message: "Login successful",
-    token
-  });
-
 }
+
 //4.logOut
 async function logout(req, res){
     res.clearCookie("token");
@@ -161,4 +171,4 @@ async function logout(req, res){
 // router.post("/verify-otp", verifyOtp);
 // router.post("/login", login);
 // router.post("/logout", logout);
-module.exports ={sendOtp,register,login,logout}
+module.exports ={sendOtp,register, login,logout}

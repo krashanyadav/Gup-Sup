@@ -15,6 +15,7 @@ function Sidebar({ setUser, selectedUserId }) {
     try {
       const res = await getMyContacts()
       // Postman ke mutabiq res.data.contacts ko set kar rahe hain
+      console.log(res.data.contacts)
       setContacts(res.data.contacts || [])
     } catch (err) {
       console.error("Contacts load karne mein error:", err)

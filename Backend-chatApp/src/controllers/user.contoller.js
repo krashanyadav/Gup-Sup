@@ -74,7 +74,7 @@ async function getAllUsers(req, res) {
     const users = await User.find({
       _id: { $ne: myId } // exclude me
     })
-      .select("username avatar about online lastSeen")
+      .select("username email about avatar online lastSeen")
       .sort({ online: -1, username: 1 }); // online first
 
     res.status(200).json({
