@@ -117,50 +117,64 @@ async function register(req, res) {
   }
 
 }
-//3.login
+//  login
 
+const jwt = require("jsonwebtoken")
 async function login(req, res) {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    // 1. User ko dhoondna
+    const user = await User.findOne({ email }).select("+password"); // Password field agar select:false hai toh
 
     if (!user) {
-      return res.status(401).json({ message: "User not found" });
+      return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    const isMatch = await user.comparePassword(password);
+    // 2. Password compare karna (Direct bcrypt use karke)
+    const match = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid credentials" });
+    if (!match) {
+      return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    if (!user.isVerified) {
-      return res.status(401).json({ message: "User not verified" });
-    }
-
+    // 3. Token generate karna
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      path: "/"
-    });
-    // ✅ TOKEN FRONTEND KO DO
-    return res.status(200).json({
+
+    // 4. Cookie options (Render/Production ke liye sahi settings)
+    //const isProduction = process.env.NODE_ENV === "production";
+    
+// src/controllers/auth.controller.js mein change karein:
+
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,      // Render par hamesha true rakhein
+  sameSite: "none",  // Cross-site (Render to Local) ke liye zaroori hai
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+  path: "/"
+});
+
+
+    // 5. Response bhejna
+    res.json({
       message: "Login successful",
-      user,
+      user: {
+        _id: user._id,
+        email: user.email,
+        fullName: user.fullName // Jo bhi fields aapko frontend par chahiye
+      },
+      token
     });
 
   } catch (error) {
-    return res.status(500).json({ message: "Server error" });
+    console.error("Login Error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
-
 //4.logOut
 async function logout(req, res){
     res.clearCookie("token");
@@ -171,4 +185,4 @@ async function logout(req, res){
 // router.post("/verify-otp", verifyOtp);
 // router.post("/login", login);
 // router.post("/logout", logout);
-module.exports ={sendOtp,register, login,logout}
+module.exports ={sendOtp,register,login,logout}
