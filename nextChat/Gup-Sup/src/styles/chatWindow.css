@@ -1,206 +1,149 @@
-.chat-window{
-display:flex;
-flex-direction:column;
-background:#efeae2;
-}
-
-.chat-header{
-display:flex;
-align-items:center;
-padding:3px 3px;
-background:#f0f2f5;
-border-bottom:1px solid #ddd;
-height: 60px;
-}
-
-.avatar-wrapper{
-position:relative;
-margin-right:11px;
-margin-top: 14px;
-}
-
-.avatar{
-width:40px;
-height:40px;
-border-radius:50%;
-object-fit:cover;
-}
-
-.status-dot{
-position:absolute;
-bottom:2px;
-right:2px;
-width:10px;
-height:10px;
-border-radius:50%;
-border:2px solid white;
-}
-
-.status-dot.online{
-background:#00c853;
-}
-
-.status-dot.offline{
-background:#bbb;
-}
-
-.header-info h3{
-margin:0;
-font-size:16px;
-color: #4a4949;
-}
-
-.status-text{
-font-size:12px;
-}
-
-.status-text.online{
-color:#00c853;
-}
-
-.status-text.offline{
-color:#888;
-}
-
-.messages{
-flex:1;
-overflow-y:auto;
-padding:15px;
-display:flex;
-flex-direction:column;
-gap:8px;
-}
-
-.chat-start{
-text-align:center;
-color:#777;
-margin-top:40px;
-}
-
-.empty-chat{
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-background:#f5f5f5;
-}
-
-.empty-box{
-text-align:center;
-color:#666;
-}
-
-.empty-box h2{
-margin-top:10px;
-}
-
-
-/* =============================
-Typing Indicator Container
-============================= */
-
-.typing-indicator{
-display:flex;
-align-items:center;
-gap:5px;
-margin:6px 10px;
-padding:8px 12px;
-background:#f1f1f1;
-border-radius:16px;
-width:fit-content;
-}
-
-/* =============================
-Typing Dots
-============================= */
-
-.typing-dot{
-width:6px;
-height:6px;
-background:#777;
-border-radius:50%;
-animation:typingBounce 1.4s infinite ease-in-out;
-}
-
-/* delay for each dot */
-
-.typing-dot:nth-child(1){
-animation-delay:0s;
-}
-
-.typing-dot:nth-child(2){
-animation-delay:0.2s;
-}
-
-.typing-dot:nth-child(3){
-animation-delay:0.4s;
-}
-
-
-/* =============================
-Animation
-============================= */
-
-@keyframes typingBounce{
-
-0%, 80%, 100%{
-transform:scale(0);
-opacity:0.3;
-}
-
-40%{
-transform:scale(1);
-opacity:1;
-}
-
-}
-
-
-/* media Query */
-
-/* Sabhi screens ke liye basic styling */
-.container {
-  width: 100%;
-  padding: 20px;
+/* Sidebar Container */
+.sidebar {
+  width: 350px;
+  height: 100%;
   display: flex;
-  flex-direction: column; /* Mobile par stack rahega */
+  flex-direction: column;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
 }
 
-/* --- Media Queries --- */
-
-/* Tablets ke liye (768px se bade screens) */
-@media (min-width: 768px) {
-  .container {
-    flex-direction: row; /* Tablet par side-by-side ho jayega */
-    background-color: lightblue;
-  }
-  
-  .sidebar {
-    width: 30%;
-  }
+/* Header & Search */
+.sidebar-header {
+  padding: 15px;
+  background-color: #f0f2f5;
 }
 
-/* Desktop ke liye (1024px se bade screens) */
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: white;
-  }
+.sidebar-header h2 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  color: #008069;
 }
 
-
-
-/* Desktop par back button ki zarurat nahi hai */
-.back-btn {
-  display: none;
-  background: none;
+.search-container input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 8px;
   border: none;
-  font-size: 24px;
-  color: rgb(245, 153, 176);
-  cursor: pointer;
-  margin-right: 10px;
+  background-color: #ffffff;
+  outline: none;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
+
+/* Contacts List */
+.contacts-list {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+/* Individual Contact Card */
+.contact-card {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  cursor: pointer;
+  border: 0.5px solid #f0eded;
+  transition: 0.2s;
+}
+
+.contact-card:hover {
+  background-color: #e5ebeb;
+}
+
+.contact-card.active {
+  background-color: #ebebeb;
+}
+
+/* Avatar & Status */
+.avatar-box {
+  position: relative;
+  margin-right: 15px;
+}
+
+.sidebar-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Text Details */
+.contact-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.contact-name {
+  font-weight: 500;
+  font-size: 16px;
+  color: #111b21;
+}
+
+
+
+.sidebar-msg {
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
+}
+
+/* --- Responsive Logic --- */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: relative; /* Mobile par pura screen cover karega */
+    z-index: 100;
+  }
+
+  /* Jab user select ho jaye, toh sidebar ko left bhej do */
+  .sidebar.mobile-hidden {
+    transform: translateX(-100%);
+    visibility: hidden;
+  }
+}
+
+
+/* remove contact */
+/* Sidebar Row setup for Name and Button */
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Remove Button Styling */
+.remove-contact-btn {
+  background: transparent;
+  border: none;
+  color: #999;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 5px;
+  opacity: 0; /* Normal state mein hidden */
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+/* Jab card par mouse jaye tab button dikhe */
+.contact-card:hover .remove-contact-btn {
+  opacity: 1;
+}
+
+.remove-contact-btn:hover {
+  color: #ff5252; /* Delete red color */
+  transform: scale(1.2);
+}
+
+/* Status dots */
+.status-indicator.offline {
+  background-color: #bbb;
+}
+
+
 
 @media (max-width: 768px) {
   .back-btn {

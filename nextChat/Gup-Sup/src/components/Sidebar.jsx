@@ -84,12 +84,12 @@ function Sidebar({ setUser, selectedUserId }) {
                     className="sidebar-avatar"
                     src={
                       user?.avatar
-                        ? `http://https://backendnextchat.onrender.com${user.avatar}`
-                        : `https://ui-avatars.com/api/?name=${user?.username}&background=random`
+                        ? `https://backendnextchat.onrender.com${user.avatar}`
+                        : `${user?.username}`
                     }
                     alt={user?.username}
                   />
-                  <span className={`status-indicator ${user?.online ? 'online' : 'offline'}`}></span>
+                   
                 </div>
 
                 <div className="contact-details">
