@@ -37,7 +37,7 @@ function Navbar(){
           <div className="profile-trigger" onClick={() => setShowMenu(!showMenu)}>
             <img 
               className="nav-avatar" 
-              src={`https://backendnextchat.onrender.com${user.avatar}`} 
+              src={`https://gup-sup-ej3r.onrender.com${user.avatar}`} 
               alt="avatar" 
             />
             <span className="username-text">{user?.username} ⏩</span>

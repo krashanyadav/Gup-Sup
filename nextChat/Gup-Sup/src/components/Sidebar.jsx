@@ -84,7 +84,7 @@ function Sidebar({ setUser, selectedUserId }) {
                     className="sidebar-avatar"
                     src={
                       user?.avatar
-                        ? `https://backendnextchat.onrender.com${user.avatar}`
+                        ? `https://gup-sup-ej3r.onrender.com${user.avatar}`
                         : `${user?.username}`
                     }
                     alt={user?.username}

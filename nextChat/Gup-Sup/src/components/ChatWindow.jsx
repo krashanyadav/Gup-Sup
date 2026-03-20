@@ -298,7 +298,7 @@ return (
 className="avatar"
 src={
 user.avatar
-? `http://localhost:3000${user.avatar}`
+? `https://gup-sup-ej3r.onrender.com${user.avatar}`
 : `https://ui-avatars.com/api/?name=${user.username}`
 }
 alt={user.username}
@@ -350,7 +350,7 @@ messages.map((m) => (
 <div className="typing-dot"></div>
 <div className="typing-dot"></div>
 
-</div>
+</div> 
 
 )}
 

@@ -29,7 +29,7 @@ useEffect(() => {
           setEmail(userData.email || "");
           
           if (userData.avatar) {
-            setPreview(`https://backendnextchat.onrender.com${userData.avatar}`);
+            setPreview(`https://gup-sup-ej3r.onrender.com${userData.avatar}`);
           }
         }
       } catch (err) {
