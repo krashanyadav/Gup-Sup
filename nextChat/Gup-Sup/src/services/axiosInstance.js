@@ -1,7 +1,7 @@
 import axios from "axios";
 const API = axios.create({
   baseURL: import.meta.env.MODE === "production"
-    ? "https://gup-sup-ej3r.onrender.com"
+    ? "https://backendnextchat.onrender.com/api"
     : "http://localhost:3000/api",
   withCredentials: true
 });

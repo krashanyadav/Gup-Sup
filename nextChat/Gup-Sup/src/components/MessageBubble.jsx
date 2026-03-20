@@ -78,7 +78,7 @@ function MessageBubble({ msg }) {
         if (msg.status === "seen") return <span className="seen">✓✓</span>
     }
 
-    const baseUrl = "https://gup-sup-ej3r.onrender.com/"
+    const baseUrl = "https://backendnextchat.onrender.com/"
 
     return (
         <div
